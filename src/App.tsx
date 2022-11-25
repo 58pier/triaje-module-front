@@ -1,34 +1,72 @@
+import styled from '@emotion/styled'
+import { Typography, Button } from '@mui/material'
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import ExistentPatient from './components/ExistentPatient';
+import NewPatient from './components/NewPatient'
+import TablePatients from './components/TablePatients';
 
-function App() {
-  const [count, setCount] = useState(0)
+type TypePatient  =
+	'newPatient' |
+	'existentPatient' |
+	null
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+const Container = styled.div`
+	margin: 20px;
+	display: flex;
+	justify-content: space-around;
+`
+
+const ContainerPatientOption = styled.div`
+	margin: 20px;
+	border-color: red;
+	width: 20%;
+	height: 40vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+`
+const ContainerForm = styled.div`
+	background-color: beige;
+	width: 50%;
+`
+
+const ContainerTable = styled.div`
+	margin: 20px;
+`
+
+const App = () => {
+
+	const [typePatient, setTypePatient] = useState<TypePatient>(null)
+
+	const handleTypePatient = (event: React.MouseEvent<HTMLButtonElement>) => {
+		let value = event.currentTarget.value
+		setTypePatient(value as TypePatient)
+	}
+
+	return (
+		<>
+			<Typography variant='h3'> Bienvenido al  Modulo de Triaje</Typography>
+			<Container>
+				<ContainerPatientOption>
+					<Typography variant='subtitle1'> Seleccione el tipo de paciente:</Typography>
+					<Button disabled={typePatient ? true : false} variant='contained' value='newPatient' onClick={ handleTypePatient}> Paciente Nuevo  </Button>
+					<Button disabled={typePatient ? true : false} variant='contained' value='existentPatient' onClick={handleTypePatient}> Paciente Existente  </Button>
+				</ContainerPatientOption>
+				<ContainerForm>
+					<Button variant='outlined' onClick={() => setTypePatient(null)}> Salir</Button>
+				{
+					(
+						typePatient === 'newPatient' && <NewPatient />
+						|| typePatient === 'existentPatient' && <ExistentPatient />
+					)
+				}
+				</ContainerForm>
+			</Container>
+			<ContainerTable>
+				<TablePatients/>
+			</ContainerTable>
+		</>
+	)
 }
 
 export default App
