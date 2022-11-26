@@ -6,14 +6,14 @@ export interface PatientInterface {
 }
 
 export interface DataTriajeInterface {
-    patient: PatientInterface | undefined;
-    admissionTime: Date | undefined;
-    temperature: number | undefined;
-    heartRate: number | undefined;
-    weight: number | undefined;
-    height: number | undefined;
-    imc: number | undefined;
-    speciality: string | undefined;
-    description: string | undefined;
-    state: 'Por Atender' | 'Atendido' | 'En Espera' | undefined;
+    patient: PatientInterface | null;
+    admissionTime: Date | null;
+    temperature: number | null;
+    heartRate: number | null;
+    weight: number | null;
+    height: number | null;
+    imc: number | null;
+    speciality: string | null;
+    description: string | null;
+    state: 'Por Atender' | 'Atendido' | 'En Espera' | null;
 }

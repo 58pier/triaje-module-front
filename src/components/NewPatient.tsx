@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled';
-import { Alert, TextField, Typography, Button } from '@mui/material';
+import { Alert, TextField, Typography, Button, InputAdornment } from '@mui/material';
 import { useState } from 'react';
 import ObligatoryForm from './ObligatoryForm';
 import { PatientInterface } from '../../data/patient.interface';
@@ -54,7 +54,6 @@ const NewPatient = () => {
 
     const handleRegister = (e:any) => {
         e.preventDefault();
-        
         if(handleValidate()){
             console.log(patient)
         }
@@ -87,7 +86,7 @@ const NewPatient = () => {
                 <CustomizedInputBase disabled={validated ? true : false} type="number" name="dni" value={patient.dni || ""} label="DNI" onChange={handleInputChange} required />
                 <CustomizedInputBase disabled={validated ? true : false} name="names" value={patient.names || ""} label="Nombres" onChange={handleInputChange} required />
                 <CustomizedInputBase disabled={validated ? true : false} name="lastNames" value={patient.lastNames || ""} label="Apellidos" onChange={handleInputChange} required />
-                <CustomizedInputBase disabled={validated ? true : false} type="number" name="age" value={patient.age || ""} label="Edad" onChange={handleInputChange} required />
+                <CustomizedInputBase InputProps={{ endAdornment: <InputAdornment position="end">años</InputAdornment>, }} disabled={validated ? true : false} type="number" name="age" value={patient.age || ""} label="Edad" onChange={handleInputChange} required />
             </ContainerForm>
             <Button type="submit" variant='contained' disabled={ validated ? true : false} onClick={handleRegister}>{ validated ?  'Paciente registrado' : 'Registrar Paciente' }</Button>
             {
@@ -95,7 +94,7 @@ const NewPatient = () => {
             }
             <ContainerObligatoryForm>
                 {
-                    ( validated ) && <ObligatoryForm/>
+                    ( validated ) && <ObligatoryForm patient={patient}/>
                 }
             </ContainerObligatoryForm>
         </Container>
