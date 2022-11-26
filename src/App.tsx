@@ -8,7 +8,7 @@ import TablePatients from './components/TablePatients';
 type TypePatient  =
 	'newPatient' |
 	'existentPatient' |
-	null
+	''
 
 const Container = styled.div`
 	margin: 20px;
@@ -36,7 +36,7 @@ const ContainerTable = styled.div`
 
 const App = () => {
 
-	const [typePatient, setTypePatient] = useState<TypePatient>(null)
+	const [typePatient, setTypePatient] = useState<TypePatient>('')
 
 	const handleTypePatient = (event: React.MouseEvent<HTMLButtonElement>) => {
 		let value = event.currentTarget.value
@@ -53,7 +53,9 @@ const App = () => {
 					<Button disabled={typePatient ? true : false} variant='contained' value='existentPatient' onClick={handleTypePatient}> Paciente Existente  </Button>
 				</ContainerPatientOption>
 				<ContainerForm>
-					<Button variant='outlined' onClick={() => setTypePatient(null)}> Salir</Button>
+				{
+					typePatient && <Button variant='outlined' onClick={() => setTypePatient('')}> Salir</Button>
+				}
 				{
 					(
 						typePatient === 'newPatient' && <NewPatient />
