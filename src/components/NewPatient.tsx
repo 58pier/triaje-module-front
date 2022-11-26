@@ -4,6 +4,7 @@ import { Alert, TextField, Typography, Button, InputAdornment } from '@mui/mater
 import { useState } from 'react';
 import ObligatoryForm from './ObligatoryForm';
 import { PatientInterface } from '../../data/patient.interface';
+import usePatient from '../hooks/usePatient';
 
 interface errorInterface  {
     message: string,
@@ -44,6 +45,7 @@ const NewPatient = () => {
     const [error, setError] = useState<errorInterface>({message: '', exist: false});
     const [patient, setPatient] = useState<PatientInterface>(INITIAL_VALUE);
     const [validated, setValidated] = useState(false)
+    const {postPatient} = usePatient();
 
     const handleInputChange = (event:React.ChangeEvent<HTMLInputElement>) => {
         setPatient({
@@ -55,7 +57,9 @@ const NewPatient = () => {
     const handleRegister = (e:any) => {
         e.preventDefault();
         if(handleValidate()){
-            console.log(patient)
+            postPatient(patient);
+            console.log('Enviado');
+            console.log(patient);
         }
     }
 

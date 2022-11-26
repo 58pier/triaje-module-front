@@ -38,6 +38,8 @@ const App = () => {
 
 	const [typePatient, setTypePatient] = useState<TypePatient>('')
 
+	
+
 	const handleTypePatient = (event: React.MouseEvent<HTMLButtonElement>) => {
 		let value = event.currentTarget.value
 		setTypePatient(value as TypePatient)
