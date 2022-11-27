@@ -926,6 +926,11 @@ magic-string@^0.26.7:
   dependencies:
     sourcemap-codec "^1.4.8"
 
+mousetrap@^1.6.5:
+  version "1.6.5"
+  resolved "https://registry.yarnpkg.com/mousetrap/-/mousetrap-1.6.5.tgz#8a766d8c272b08393d5f56074e0b5ec183485bf9"
+  integrity sha512-QNo4kEepaIBwiT8CDhP98umTetp+JNfQYBWvC1pc6/OAibuXtRcxZ58Qz8skvEHYvURne/7R8T5VoOI7rDsEUA==
+
 ms@2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
@@ -1033,6 +1038,13 @@ react-router@6.4.3:
   integrity sha512-BT6DoGn6aV1FVP5yfODMOiieakp3z46P1Fk0RNzJMACzE7C339sFuHebfvWtnB4pzBvXXkHP2vscJzWRuUjTtA==
   dependencies:
     "@remix-run/router" "1.0.3"
+
+react-shortcut@^2.0.9:
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/react-shortcut/-/react-shortcut-2.0.9.tgz#4debe57453bf5949484fd39a525123013130f3b7"
+  integrity sha512-2DF8VdF0dj41AEcz02TpS2qAm24OlNQrpkGYWqw2sVFJAOTapElDzsveCXHT0QHjxd1Fo9BtKgZBdyzLcbn7HA==
+  dependencies:
+    mousetrap "^1.6.5"
 
 react-transition-group@^4.4.5:
   version "4.4.5"

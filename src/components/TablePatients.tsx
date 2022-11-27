@@ -9,6 +9,7 @@ interface propsInterface {
 
 }
 
+
 const TablePatients = ({patientsTriaje, isLoading }: propsInterface) => {
 
     const columns: GridColDef[] = [
@@ -44,6 +45,7 @@ const TablePatients = ({patientsTriaje, isLoading }: propsInterface) => {
 
     return (
         <div style={{ height: 400, width: '100%' }}>
+
             {
                 isLoading ? <h1>Cargando...</h1> :
                     <DataGrid

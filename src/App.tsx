@@ -6,6 +6,11 @@ import NewPatient from './components/NewPatient'
 import TablePatients from './components/TablePatients';
 import usePatientTriaje from './hooks/usePatientTriaje';
 import usePatient from './hooks/usePatient';
+import Shortcuts from './components/Shortcuts';
+
+//Speech
+
+
 
 type TypePatient  =
 	'newPatient' |
@@ -50,6 +55,7 @@ const App = () => {
 
 	return (
 		<>
+			<Shortcuts/>
 			<Typography variant='h3'> Bienvenido al  Modulo de Triaje</Typography>
 			<Container>
 				<ContainerPatientOption>

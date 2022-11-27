@@ -8,7 +8,7 @@ import { PatientInterface, DataTriajeInterface } from '../../data/patient.interf
 interface propsInterface {
     postPatientTriaje: (data: DataTriajeInterface) => void,
     postPatient: (data: PatientInterface) => void,
-    setTypePatient: (type: string) => void
+    setTypePatient: (type: any) => void
 }
 interface errorInterface  {
     message: string,
