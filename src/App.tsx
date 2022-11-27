@@ -4,6 +4,8 @@ import { useState } from 'react'
 import ExistentPatient from './components/ExistentPatient';
 import NewPatient from './components/NewPatient'
 import TablePatients from './components/TablePatients';
+import usePatientTriaje from './hooks/usePatientTriaje';
+import usePatient from './hooks/usePatient';
 
 type TypePatient  =
 	'newPatient' |
@@ -38,8 +40,8 @@ const App = () => {
 
 	const [typePatient, setTypePatient] = useState<TypePatient>('')
 
-	
-	
+	const { isLoading, patientsTriaje, postPatientTriaje  } = usePatientTriaje();
+	const { patients, postPatient  } = usePatient();
 
 	const handleTypePatient = (event: React.MouseEvent<HTMLButtonElement>) => {
 		let value = event.currentTarget.value
@@ -61,14 +63,14 @@ const App = () => {
 				}
 				{
 					(
-						typePatient === 'newPatient' && <NewPatient />
+						typePatient === 'newPatient' && <NewPatient postPatient={postPatient} postPatientTriaje={postPatientTriaje} setTypePatient={setTypePatient}/>
 						|| typePatient === 'existentPatient' && <ExistentPatient />
 					)
 				}
 				</ContainerForm>
 			</Container>
 			<ContainerTable>
-				<TablePatients/>
+				<TablePatients isLoading={isLoading} patientsTriaje={patientsTriaje} />
 			</ContainerTable>
 		</>
 	)

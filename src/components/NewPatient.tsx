@@ -3,9 +3,13 @@ import styled from '@emotion/styled';
 import { Alert, TextField, Typography, Button, InputAdornment } from '@mui/material';
 import { useState } from 'react';
 import ObligatoryForm from './ObligatoryForm';
-import { PatientInterface } from '../../data/patient.interface';
-import usePatient from '../hooks/usePatient';
+import { PatientInterface, DataTriajeInterface } from '../../data/patient.interface';
 
+interface propsInterface {
+    postPatientTriaje: (data: DataTriajeInterface) => void,
+    postPatient: (data: PatientInterface) => void,
+    setTypePatient: (type: string) => void
+}
 interface errorInterface  {
     message: string,
     exist: boolean
@@ -40,12 +44,15 @@ const INITIAL_VALUE = {
     age: null
 }
 
-const NewPatient = () => {
+const NewPatient = ({
+    postPatientTriaje, 
+    postPatient,
+    setTypePatient
+}: propsInterface) => {
 
     const [error, setError] = useState<errorInterface>({message: '', exist: false});
     const [patient, setPatient] = useState<PatientInterface>(INITIAL_VALUE);
     const [validated, setValidated] = useState(false)
-    const {postPatient} = usePatient();
 
     const handleInputChange = (event:React.ChangeEvent<HTMLInputElement>) => {
         setPatient({
@@ -58,8 +65,6 @@ const NewPatient = () => {
         e.preventDefault();
         if(handleValidate()){
             postPatient(patient);
-            console.log('Enviado');
-            console.log(patient);
         }
     }
 
@@ -98,7 +103,7 @@ const NewPatient = () => {
             }
             <ContainerObligatoryForm>
                 {
-                    ( validated ) && <ObligatoryForm patient={patient}/>
+                    ( validated ) && <ObligatoryForm patient={patient} postPatientTriaje={postPatientTriaje} setTypePatient={setTypePatient} />
                 }
             </ContainerObligatoryForm>
         </Container>

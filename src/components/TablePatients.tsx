@@ -1,20 +1,20 @@
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { useEffect } from 'react';
 import usePatientTriaje from '../hooks/usePatientTriaje';
+import { DataTriajeInterface } from '../../data/patient.interface';
 
-const TablePatients = () => {
-    
-    const {isLoading, patientsTriaje} = usePatientTriaje();
+interface propsInterface {
+    patientsTriaje: Array<DataTriajeInterface>,
+    isLoading: boolean
 
-    useEffect( () => {
+}
 
-    }, [patientsTriaje])
-    
+const TablePatients = ({patientsTriaje, isLoading }: propsInterface) => {
 
     const columns: GridColDef[] = [
         { field: 'patient', headerName: 'DNI', width: 150, renderCell: (params) => {return params.value.dni}},
         { field: 'names', headerName: 'Nombres', width: 200, valueGetter: ({id}) => {
-            const item = patientsTriaje.find((patienTriaje) => patienTriaje.patient?.dni === id);
+            const item = patientsTriaje.find((patientTriaje) => patientTriaje.patient?.dni === id);
             return item?.patient?.names;
         } },
         { field: 'lastNames', headerName: 'Apellidos', width: 300, valueGetter: ({id}) => {

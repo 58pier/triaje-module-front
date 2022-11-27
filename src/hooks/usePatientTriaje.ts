@@ -13,9 +13,10 @@ const usePatientTriaje = () => {
         setIsLoading(false);
     }
 
-    const postPatientTriaje = async (patientsTriaje: DataTriajeInterface) => {
-        const newPatientTriaje = await postDataPatientsTriaje(patientsTriaje);
-        setPatientsTriaje([...[patientsTriaje], newPatientTriaje]);
+    const postPatientTriaje = async (patientTriaje: DataTriajeInterface) => {
+        console.log(patientsTriaje);
+        await postDataPatientsTriaje(patientTriaje);
+        setPatientsTriaje([...patientsTriaje, patientTriaje]);
         getDataPacientesTriaje();
     }
 

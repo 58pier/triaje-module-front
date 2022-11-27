@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Button, InputLabel, InputAdornment, MenuItem, Select, Typography, TextField, FormControl, Alert } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { DataTriajeInterface, PatientInterface } from '../../data/patient.interface';
-import usePatientTriaje from '../hooks/usePatientTriaje';
+
 
 interface errorInterface {
     message: string,
@@ -11,6 +11,8 @@ interface errorInterface {
 
 interface propsInterface {
     patient: PatientInterface,
+    postPatientTriaje: (data: DataTriajeInterface) => void,
+    setTypePatient: (type: string) => void
 }
 
 const Container = styled.div`
@@ -45,11 +47,10 @@ const INITIAL_STATE = {
     state: null
 }
 
-const ObligatoryForm = ({ patient }: propsInterface) => {
+const ObligatoryForm = ({ patient, postPatientTriaje, setTypePatient }: propsInterface) => {
 
     const [dataTriaje, setDataTriaje] = useState<DataTriajeInterface>(INITIAL_STATE)
     const [error, setError] = useState<errorInterface>({ message: '', exist: false });
-    const {postPatientTriaje} = usePatientTriaje();
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDataTriaje({
@@ -76,6 +77,7 @@ const ObligatoryForm = ({ patient }: propsInterface) => {
                 state: 'En Espera'
             })
             postPatientTriaje(data);
+            setTypePatient('');
         }
     }
 
