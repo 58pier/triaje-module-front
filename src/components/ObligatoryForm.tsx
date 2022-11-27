@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Button, InputLabel, InputAdornment, MenuItem, Select, Typography, TextField, FormControl, Alert } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DataTriajeInterface, PatientInterface } from '../../data/patient.interface';
 import usePatientTriaje from '../hooks/usePatientTriaje';
 
@@ -61,6 +61,13 @@ const ObligatoryForm = ({ patient }: propsInterface) => {
     const handleRegister = (event: any) => {
         event.preventDefault();
         if (handleValidate()) {
+            const data : DataTriajeInterface = {
+                ...dataTriaje,
+                patient: patient,
+                imc: parseFloat((dataTriaje.weight! / (dataTriaje.height! * dataTriaje.height!)).toFixed(2)),
+                admissionTime: new Date(),
+                state: "En Espera"
+            }
             setDataTriaje({
                 ...dataTriaje,
                 patient: patient,
@@ -68,7 +75,7 @@ const ObligatoryForm = ({ patient }: propsInterface) => {
                 admissionTime: new Date(),
                 state: 'En Espera'
             })
-            postPatientTriaje(dataTriaje);
+            postPatientTriaje(data);
         }
     }
 

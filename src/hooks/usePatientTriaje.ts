@@ -7,7 +7,7 @@ const usePatientTriaje = () => {
     const [patientsTriaje, setPatientsTriaje] = useState<Array<DataTriajeInterface>>([])
     const [isLoading, setIsLoading] = useState(true);
 
-    const getDatosTriaje = async () => {
+    const getDataPacientesTriaje = async () => {
         const newPatientsTriaje = await getDataPatientsTriaje();
         setPatientsTriaje(newPatientsTriaje);
         setIsLoading(false);
@@ -16,13 +16,14 @@ const usePatientTriaje = () => {
     const postPatientTriaje = async (patientsTriaje: DataTriajeInterface) => {
         const newPatientTriaje = await postDataPatientsTriaje(patientsTriaje);
         setPatientsTriaje([...[patientsTriaje], newPatientTriaje]);
+        getDataPacientesTriaje();
     }
 
     useEffect(() => {
-        getDatosTriaje();
+        getDataPacientesTriaje();
     }, [])
 
-    return { isLoading , patientsTriaje, postPatientTriaje };
+    return { isLoading , patientsTriaje, postPatientTriaje, getDataPacientesTriaje };
 }
 
 export default usePatientTriaje

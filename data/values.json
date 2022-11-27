@@ -1,60 +1,60 @@
 {
-  "patients": [
-    {
-      "id": 1,
-      "dni": 73588926,
-      "names": "Piero Geovanny",
-      "lastNames": "Pozo Fabian",
-      "age": 20
-    },
-    {
-      "dni": 22474948,
-      "names": "Ines",
-      "lastNames": "Fabian",
-      "age": 45,
-      "id": 2
-    },
-    {
-      "dni": 22994134,
-      "names": "Gelacio",
-      "lastNames": "Pozo",
-      "age": 56,
-      "id": 3
-    }
-  ],
-  "dataTriaje": [
-    {
-      "id": 1,
-      "dni": 73588926,
-      "names": "Piero Geovanny",
-      "lastNames": "Pozo Fabian",
-      "age": 20,
-      "patient": 73588926,
-      "admissionTime": "Sat Nov 26 2022 15:11:26",
-      "temperature": 38,
-      "heartRate": 75,
-      "weight": 84,
-      "height": 1.74,
-      "imc": 27.74,
-      "speciality": "Medicina Interna",
-      "description": "",
-      "state": "En Espera"
-    },
-    {
-    "id": 2,
-      "dni": 22994134,
-      "names": "Gelacio",
-      "lastNames": "Pozo",
-      "age": 56,
-      "admissionTime": "2022-11-26T22:26:05.020Z",
-      "temperature": "38",
-      "heartRate": "96",
-      "weight": "78",
-      "height": "1.74",
-      "imc": 25.76,
-      "speciality": "Pediatria",
-      "description": null,
-      "state": "En Espera"
-    }
-  ]
+    "patients": [
+        {
+            "id": 1,
+            "dni": 73588926,
+            "names": "Piero Geovanny",
+            "lastNames": "Pozo Fabian",
+            "age": 20
+        },
+        {
+            "dni": 22474948,
+            "names": "Ines",
+            "lastNames": "Fabian",
+            "age": 45,
+            "id": 2
+        },
+        {
+            "dni": 22994134,
+            "names": "Gelacio",
+            "lastNames": "Pozo",
+            "age": 56,
+            "id": 3
+        }
+    ],
+    "dataTriaje": [
+        {
+            "id": 1,
+            "dni": 73588926,
+            "names": "Piero Geovanny",
+            "lastNames": "Pozo Fabian",
+            "age": 20,
+            "patient": 73588926,
+            "admissionTime": "Sat Nov 26 2022 15:11:26",
+            "temperature": 38,
+            "heartRate": 75,
+            "weight": 84,
+            "height": 1.74,
+            "imc": 27.74,
+            "speciality": "Medicina Interna",
+            "description": "",
+            "state": "En Espera"
+        },
+        {
+            "id": 2,
+            "dni": 22994134,
+            "names": "Gelacio",
+            "lastNames": "Pozo",
+            "age": 56,
+            "admissionTime": "2022-11-26T22:26:05.020Z",
+            "temperature": "38",
+            "heartRate": "96",
+            "weight": "78",
+            "height": "1.74",
+            "imc": 25.76,
+            "speciality": "Pediatria",
+            "description": null,
+            "state": "En Espera"
+        }
+    ]
 }

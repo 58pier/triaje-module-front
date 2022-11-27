@@ -1,16 +1,26 @@
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { useEffect } from 'react';
 import usePatientTriaje from '../hooks/usePatientTriaje';
 
 const TablePatients = () => {
+    
+    const {isLoading, patientsTriaje} = usePatientTriaje();
 
-        const {isLoading, patientsTriaje} = usePatientTriaje();
+    useEffect( () => {
 
-
+    }, [patientsTriaje])
+    
 
     const columns: GridColDef[] = [
-        { field: 'dni', headerName: 'DNI', width: 150 },
-        { field: 'names', headerName: 'Nombres', width: 200 },
-        { field: 'lastNames', headerName: 'Apellidos', width: 300 },
+        { field: 'patient', headerName: 'DNI', width: 150, renderCell: (params) => {return params.value.dni}},
+        { field: 'names', headerName: 'Nombres', width: 200, valueGetter: ({id}) => {
+            const item = patientsTriaje.find((patienTriaje) => patienTriaje.patient?.dni === id);
+            return item?.patient?.names;
+        } },
+        { field: 'lastNames', headerName: 'Apellidos', width: 300, valueGetter: ({id}) => {
+            const item = patientsTriaje.find((patientTriaje) => patientTriaje.patient?.dni === id);
+            return item?.patient?.lastNames;
+        } },
         {
             field: 'speciality',
             headerName: 'Especialidad',
@@ -28,6 +38,7 @@ const TablePatients = () => {
             headerName: 'Hora de Ingreso',
             type: 'date',
             width: 150,
+            renderCell: ({value}) => { let time = new Date(value);  return time.toLocaleDateString('es-PE', {weekday: 'short'}) + " " + time.getHours() + ':' + time.getMinutes()   }
         },
     ];
 
@@ -41,7 +52,7 @@ const TablePatients = () => {
                         pageSize={5}
                         rowsPerPageOptions={[5]}
                         checkboxSelection
-                        getRowId={(row) => row.dni}
+                        getRowId={(row) => row.patient.dni}
                     />
             }
         </div>

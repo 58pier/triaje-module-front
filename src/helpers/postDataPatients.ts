@@ -1,7 +1,7 @@
 import { PatientInterface } from '../../data/patient.interface';
 
 export const postDataPatients = async (patient: PatientInterface) => {
-    const url = 'http://localhost:3000/patients';
+    const url = 'http://localhost:4000/api/patients';
     const resp = await fetch(url, {
         method: 'POST',
         headers: {
@@ -9,6 +9,6 @@ export const postDataPatients = async (patient: PatientInterface) => {
         },
         body: JSON.stringify(patient),
     });
-    const data = await resp.json();
+    const {data} = await resp.json();
     return data;
 }

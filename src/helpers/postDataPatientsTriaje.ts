@@ -1,7 +1,7 @@
 import { DataTriajeInterface } from '../../data/patient.interface';
 
 export const postDataPatientsTriaje = async (dataTriaje: DataTriajeInterface) => {
-    const url = 'http://localhost:3000/dataTriaje';
+    const url = 'http://localhost:4000/api/triaje';
     const resp = await fetch(url, {
         method: 'POST',
         headers: {
@@ -9,6 +9,6 @@ export const postDataPatientsTriaje = async (dataTriaje: DataTriajeInterface) =>
         },
         body: JSON.stringify(dataTriaje),
     });
-    const data = await resp.json();
+    const {data} = await resp.json();
     return data;
 }
