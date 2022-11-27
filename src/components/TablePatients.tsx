@@ -1,7 +1,8 @@
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { useEffect } from 'react';
+import { DataGrid, GridColDef, GridSelectionModel, GridValueGetterParams } from '@mui/x-data-grid';
+import { useEffect, useState } from 'react';
 import usePatientTriaje from '../hooks/usePatientTriaje';
 import { DataTriajeInterface } from '../../data/patient.interface';
+import PatientInfo from './PatientInfo';
 
 interface propsInterface {
     patientsTriaje: Array<DataTriajeInterface>,
@@ -11,6 +12,27 @@ interface propsInterface {
 
 
 const TablePatients = ({patientsTriaje, isLoading }: propsInterface) => {
+
+    const [open, setOpen] = useState(false);
+    const [valuePatient, setValuePatient] = useState<string>('')
+
+    const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([])
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleSelect = (newSelectionModel: GridSelectionModel) => {
+        if(newSelectionModel.length = 1){
+            setValuePatient(newSelectionModel[0].toString());
+            handleClickOpen();
+        }
+    }
+
 
     const columns: GridColDef[] = [
         { field: 'patient', headerName: 'DNI', width: 150, renderCell: (params) => {return params.value.dni}},
@@ -45,7 +67,10 @@ const TablePatients = ({patientsTriaje, isLoading }: propsInterface) => {
 
     return (
         <div style={{ height: 400, width: '100%' }}>
-
+            <PatientInfo open={open}
+                onClose={handleClose}
+                valuePatient={valuePatient}
+            />
             {
                 isLoading ? <h1>Cargando...</h1> :
                     <DataGrid
@@ -55,6 +80,8 @@ const TablePatients = ({patientsTriaje, isLoading }: propsInterface) => {
                         rowsPerPageOptions={[5]}
                         checkboxSelection
                         getRowId={(row) => row.patient.dni}
+                        onSelectionModelChange={ handleSelect}
+                        selectionModel={selectionModel}
                     />
             }
         </div>

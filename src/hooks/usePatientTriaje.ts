@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { DataTriajeInterface } from '../../data/patient.interface';
-import { getDataPatientsTriaje } from '../helpers/getDataPatientsTriaje';
+import { getDataPatientsTriaje, getDataPatientTriaje } from '../helpers/getDataPatientsTriaje';
 import { postDataPatientsTriaje } from '../helpers/postDataPatientsTriaje';
 
 const usePatientTriaje = () => {
@@ -20,11 +20,17 @@ const usePatientTriaje = () => {
         getDataPacientesTriaje();
     }
 
+    const getDataPaciente = async (dni: number) => {
+        console.log(dni)
+        const newPatientTriaje = await getDataPatientTriaje(dni);
+        return newPatientTriaje;
+    }
+
     useEffect(() => {
         getDataPacientesTriaje();
     }, [])
 
-    return { isLoading , patientsTriaje, postPatientTriaje, getDataPacientesTriaje };
+    return { isLoading , patientsTriaje, postPatientTriaje, getDataPacientesTriaje, getDataPaciente };
 }
 
 export default usePatientTriaje

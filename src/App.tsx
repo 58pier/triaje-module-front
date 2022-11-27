@@ -47,6 +47,7 @@ const App = () => {
 
 	//APP
 	const [typePatient, setTypePatient] = useState<TypePatient>('')
+	const [showTable, setShowTable] = useState(false)
 
 	const { isLoading, patientsTriaje, postPatientTriaje  } = usePatientTriaje();
 	const { patients, postPatient  } = usePatient();
@@ -59,12 +60,12 @@ const App = () => {
 	return (
 		<>
 			<Shortcuts/>
-			<Typography variant='h3'> Bienvenido al  Modulo de Triaje</Typography>
+			<Typography variant='h3' align='center' color="#4682B4"> Bienvenido al  Modulo de Triaje</Typography>
 			<Container>
 				<ContainerPatientOption>
-					<Typography variant='subtitle1'> Seleccione el tipo de paciente:</Typography>
+					<Typography variant='subtitle1'> Seleccione la función deseada :</Typography>
 					<Button disabled={typePatient ? true : false} variant='contained' value='newPatient' onClick={ handleTypePatient}> Paciente Nuevo  </Button>
-					<Button disabled={typePatient ? true : false} variant='contained' value='existentPatient' onClick={handleTypePatient}> Paciente Existente  </Button>
+					<Button disabled={typePatient ? true : false} variant='contained' value='existentPatient' onClick={ () => setShowTable(!showTable) }> Ver Tabla de Triaje </Button>
 				</ContainerPatientOption>
 				<ContainerForm>
 				{
@@ -78,9 +79,12 @@ const App = () => {
 				}
 				</ContainerForm>
 			</Container>
-			<ContainerTable>
-				<TablePatients isLoading={isLoading} patientsTriaje={patientsTriaje} />
-			</ContainerTable>
+			{
+				showTable && 
+				<ContainerTable>
+					<TablePatients isLoading={isLoading} patientsTriaje={patientsTriaje} />
+				</ContainerTable>
+			}
 		</>
 	)
 }
