@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime'
 import styled from '@emotion/styled'
 import { Typography, Button } from '@mui/material'
 import { useState } from 'react'
@@ -43,6 +44,8 @@ const ContainerTable = styled.div`
 
 const App = () => {
 
+
+	//APP
 	const [typePatient, setTypePatient] = useState<TypePatient>('')
 
 	const { isLoading, patientsTriaje, postPatientTriaje  } = usePatientTriaje();

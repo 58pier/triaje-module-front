@@ -3,6 +3,8 @@ import { Button, InputLabel, InputAdornment, MenuItem, Select, Typography, TextF
 import { useEffect, useState } from 'react';
 import { DataTriajeInterface, PatientInterface } from '../../data/patient.interface';
 
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+
 
 interface errorInterface {
     message: string,
@@ -48,6 +50,8 @@ const INITIAL_STATE = {
 }
 
 const ObligatoryForm = ({ patient, postPatientTriaje, setTypePatient }: propsInterface) => {
+
+    const { transcript  } = useSpeechRecognition();
 
     const [dataTriaje, setDataTriaje] = useState<DataTriajeInterface>(INITIAL_STATE)
     const [error, setError] = useState<errorInterface>({ message: '', exist: false });
@@ -111,15 +115,30 @@ const ObligatoryForm = ({ patient, postPatientTriaje, setTypePatient }: propsInt
         }
     }
 
+    const handleFocus = (event:any) => {
+        SpeechRecognition.startListening({ language: 'es-ES' });
+        console.log(transcript)
+    }
+
+    const handleBlur = (event: any) => {
+        SpeechRecognition.stopListening()
+        if(transcript){
+            setDataTriaje({
+                ...dataTriaje,
+                [event.target.name]: transcript
+            })
+        }
+    }
+
 
     return (
         <Container>
             <Typography variant='body1'> Ingrese los datos de triaje del paciente:</Typography>
             <ContainerForm>
-                <CustomizedInputBase InputProps={{ endAdornment: <InputAdornment position="end">°C</InputAdornment>, }} onChange={handleInputChange} value={dataTriaje.temperature || ''} name="temperature" label="Temperatura" required />
-                <CustomizedInputBase onChange={handleInputChange} value={dataTriaje.heartRate || ''} name="heartRate" label="Frecuencia Cardiaca" required />
-                <CustomizedInputBase InputProps={{ endAdornment: <InputAdornment position="end">kg</InputAdornment>, }} onChange={handleInputChange} value={dataTriaje.weight || ''} name="weight" label="Peso" required />
-                <CustomizedInputBase InputProps={{ endAdornment: <InputAdornment position="end">m</InputAdornment>, }} onChange={handleInputChange} value={dataTriaje.height || ''} name="height" label="Talla" required />
+                <CustomizedInputBase onFocus={handleFocus} onBlur={handleBlur} InputProps={{ endAdornment: <InputAdornment position="end">°C</InputAdornment>, }} onChange={handleInputChange} value={dataTriaje.temperature || ''} name="temperature" label="Temperatura" required />
+                <CustomizedInputBase onFocus={handleFocus} onBlur={handleBlur} onChange={handleInputChange} value={dataTriaje.heartRate || ''} name="heartRate" label="Frecuencia Cardiaca" required />
+                <CustomizedInputBase onFocus={handleFocus} onBlur={handleBlur} InputProps={{ endAdornment: <InputAdornment position="end">kg</InputAdornment>, }} onChange={handleInputChange} value={dataTriaje.weight || ''} name="weight" label="Peso" required />
+                <CustomizedInputBase onFocus={handleFocus} onBlur={handleBlur} InputProps={{ endAdornment: <InputAdornment position="end">m</InputAdornment>, }} onChange={handleInputChange} value={dataTriaje.height || ''} name="height" label="Talla" required />
                 <FormControl>
                     <InputLabel id="speciality-select">Especialidad</InputLabel>
                     <Select
@@ -140,7 +159,7 @@ const ObligatoryForm = ({ patient, postPatientTriaje, setTypePatient }: propsInt
                         <MenuItem value="Traumatología"> Traumatología </MenuItem>
                     </Select>
                 </FormControl>
-                <TextField fullWidth onChange={handleInputChange} value={dataTriaje.description || ''} name="description" multiline rows={4} label="Descripcion" />
+                <TextField fullWidth onFocus={handleFocus} onBlur={handleBlur} onChange={handleInputChange} value={dataTriaje.description || ''} name="description" multiline rows={4} label="Descripcion" />
             </ContainerForm>
             <Button type="submit" onClick={handleRegister} variant='contained' > Registrar Datos del Paciente</Button>
             {
