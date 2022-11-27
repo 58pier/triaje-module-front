@@ -52,7 +52,7 @@ const TablePatients = ({patientsTriaje, isLoading }: propsInterface) => {
         },
         {
             field: 'state',
-            headerName: 'Estado',
+            headerName: 'Tipo de Urgencia',
             type: 'string',
             width: 150,
         },

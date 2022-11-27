@@ -58,7 +58,7 @@ const PatientInfo = ({ open, onClose, valuePatient}: propsInterface) => {
 
     return (
         <Dialog onClose={handleClose} open={open} fullWidth maxWidth={'md'}>
-            <DialogTitle align='center' > Registro de atención en Triaje </DialogTitle>
+            <DialogTitle align='center' fontSize={18} > Registro de atención en Triaje </DialogTitle>
 
                    <Container>
                         <Typography variant='h5'> Información del Paciente </Typography>
@@ -106,6 +106,10 @@ const PatientInfo = ({ open, onClose, valuePatient}: propsInterface) => {
                             <ContainerText2>
                                 <Typography variant='h6'> Descripción  </Typography>
                                 <Typography variant='subtitle1'> {patient.description} </Typography>
+                            </ContainerText2>
+                            <ContainerText2>
+                                <Typography variant='h6'> Tipo de Urgencia </Typography>
+                                <Typography variant='subtitle1'> {patient.state} </Typography>
                             </ContainerText2>
                         </ContainerInfoTriaje>
                    </Container>

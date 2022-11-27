@@ -15,5 +15,5 @@ export interface DataTriajeInterface {
     imc: number | null;
     speciality: string | null;
     description: string | null;
-    state: 'Por Atender' | 'Atendido' | 'En Espera' | null;
+    state: string | null ;
 }

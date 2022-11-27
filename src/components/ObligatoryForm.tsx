@@ -71,14 +71,12 @@ const ObligatoryForm = ({ patient, postPatientTriaje, setTypePatient }: propsInt
                 patient: patient,
                 imc: parseFloat((dataTriaje.weight! / (dataTriaje.height! * dataTriaje.height!)).toFixed(2)),
                 admissionTime: new Date(),
-                state: "En Espera"
             }
             setDataTriaje({
                 ...dataTriaje,
                 patient: patient,
                 imc: parseFloat((dataTriaje.weight! / (dataTriaje.height! * dataTriaje.height!)).toFixed(2)),
                 admissionTime: new Date(),
-                state: 'En Espera'
             })
             postPatientTriaje(data);
             setTypePatient('');
@@ -157,6 +155,27 @@ const ObligatoryForm = ({ patient, postPatientTriaje, setTypePatient }: propsInt
                         <MenuItem value="Medicina Interna"> Medicina Interna </MenuItem>
                         <MenuItem value="Pediatria"> Pediatria </MenuItem>
                         <MenuItem value="Traumatología"> Traumatología </MenuItem>
+                    </Select>
+                </FormControl>
+                <FormControl>
+                    <InputLabel id="speciality-select">Nivel de Urgencia</InputLabel>
+                    <Select
+                        labelId="speciality-select"
+                        label="Nivel de urgencia"
+                        name="state"
+                        required
+                        sx={{
+                            width: 400,
+                            height: 56,
+                        }}
+                        value={dataTriaje.state || ''}
+                        onChange={(e) => setDataTriaje({ ...dataTriaje, state: e.target.value as string })}
+                    >
+                        <MenuItem value="Resucitación"> Resucitación </MenuItem>
+                        <MenuItem value="Emergencia"> Emergencia Interna </MenuItem>
+                        <MenuItem value="Urgencia"> Urgencia </MenuItem>
+                        <MenuItem value="Urgencia Menor"> Urgencia </MenuItem>
+                        <MenuItem value="Sin Urgencia"> Sin </MenuItem>
                     </Select>
                 </FormControl>
                 <TextField fullWidth onFocus={handleFocus} onBlur={handleBlur} onChange={handleInputChange} value={dataTriaje.description || ''} name="description" multiline rows={4} label="Descripcion" />
