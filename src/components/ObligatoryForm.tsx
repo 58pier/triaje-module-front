@@ -51,7 +51,7 @@ const INITIAL_STATE = {
 
 const ObligatoryForm = ({ patient, postPatientTriaje, setTypePatient }: propsInterface) => {
 
-    const { transcript  } = useSpeechRecognition();
+    const { transcript, resetTranscript  } = useSpeechRecognition();
 
     const [dataTriaje, setDataTriaje] = useState<DataTriajeInterface>(INITIAL_STATE)
     const [error, setError] = useState<errorInterface>({ message: '', exist: false });
@@ -114,6 +114,7 @@ const ObligatoryForm = ({ patient, postPatientTriaje, setTypePatient }: propsInt
     }
 
     const handleFocus = (event:any) => {
+        resetTranscript();
         SpeechRecognition.startListening({ language: 'es-ES' });
         console.log(transcript)
     }
@@ -167,6 +168,7 @@ const ObligatoryForm = ({ patient, postPatientTriaje, setTypePatient }: propsInt
                         sx={{
                             width: 400,
                             height: 56,
+                            fontSize: 14
                         }}
                         value={dataTriaje.state || ''}
                         onChange={(e) => setDataTriaje({ ...dataTriaje, state: e.target.value as string })}
@@ -174,8 +176,8 @@ const ObligatoryForm = ({ patient, postPatientTriaje, setTypePatient }: propsInt
                         <MenuItem value="Resucitación"> Resucitación </MenuItem>
                         <MenuItem value="Emergencia"> Emergencia Interna </MenuItem>
                         <MenuItem value="Urgencia"> Urgencia </MenuItem>
-                        <MenuItem value="Urgencia Menor"> Urgencia </MenuItem>
-                        <MenuItem value="Sin Urgencia"> Sin </MenuItem>
+                        <MenuItem value="Urgencia Menor"> Urgencia Menor</MenuItem>
+                        <MenuItem value="Sin Urgencia"> Sin Urgencia</MenuItem>
                     </Select>
                 </FormControl>
                 <TextField fullWidth onFocus={handleFocus} onBlur={handleBlur} onChange={handleInputChange} value={dataTriaje.description || ''} name="description" multiline rows={4} label="Descripcion" />
